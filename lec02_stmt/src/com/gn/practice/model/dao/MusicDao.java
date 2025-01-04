@@ -51,7 +51,7 @@ public class MusicDao {
 			String url = "jdbc:mariadb://127.0.0.1:3306/watermelon_music";
 			conn = DriverManager.getConnection(url, "scott", "tiger");
 			stmt = conn.createStatement();
-			String sql = "INSER INTO wm_user (user_id,user_pw,user_name)"
+			String sql = "INSERT INTO wm_user (user_id,user_pw,user_name)"
 					+ "VALUES ('"+u.getUserId()
 					+ "','" + u.getUserPw()
 					+ "','" + u.getUserName() + "')";

@@ -27,7 +27,7 @@ public class MusicMenu {
 	}
 	
 	public void login() {
-		System.out.println("=== 2. 로그인 ===");
+		System.out.println("=== 로그인 ===");
 		System.out.print("아이디 : ");
 		String id = sc.nextLine();
 		System.out.print("비밀번호 : ");
@@ -38,13 +38,27 @@ public class MusicMenu {
 			if(id.equals("admin")) {
 				System.out.println("*** 관리자 메뉴 ***");
 				System.out.println("1. 음악 추가");
-				
 				System.out.println("2. 음악 인기 순위 조회");
+				int menu = sc.nextInt();
+				sc.nextLine();
+				switch(menu) {
+					case 1 : break;
+					case 2 : break;
+					default : System.out.println("메인 메뉴로 돌아갑니다.");
+				}	
 			} else {
 				System.out.println("*** 사용자 메뉴 ***");
 				System.out.println("1. 음악 재생");
 				System.out.println("2. 개인 정보 수정");
 				System.out.println("3. 회원 탈퇴");
+				int menu = sc.nextInt();
+				sc.nextLine();
+				switch(menu) {
+					case 1 : break;
+					case 2 : break;
+					case 3 : break;
+					default : System.out.println("메인 메뉴로 돌아갑니다.");
+				}	
 			}
 		} else {
 			System.out.println("아이디 혹은 비밀번호가 잘못되었습니다.");
@@ -53,7 +67,7 @@ public class MusicMenu {
 	}
 	
 	public void signIn() {
-		System.out.println("=== 1. 회원가입 ===");
+		System.out.println("=== 회원가입 ===");
 		System.out.print("아이디 : ");
 		String id = sc.nextLine();
 		System.out.print("비밀번호 : ");
