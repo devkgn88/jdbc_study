@@ -10,6 +10,10 @@ public class MusicController {
 	
 	private MusicDao md = new MusicDao();
 	
+	public List<Song> selectMusicAllOrderByCnt(){
+		return md.selectMusicAllOrderByCnt();
+	}
+	
 	public int updatePlayCnt(int no) {
 		return md.updatePlayCnt(no);
 	}

@@ -13,6 +13,39 @@ import com.gn.practice.model.vo.User;
 
 public class MusicDao {
 	
+	public List<Song> selectMusicAllOrderByCnt(){
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		List<Song> list = new ArrayList<Song>();
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mariadb://127.0.0.1:3306/watermelon_music";
+			conn = DriverManager.getConnection(url, "scott", "tiger");
+			stmt = conn.createStatement();
+			String sql = "SELECT `no`,title,singer,cnt "
+					+ "FROM wm_song "
+					+ "ORDER BY cnt DESC";
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Song s = new Song(rs.getInt("no"), rs.getString("title")
+						,rs.getString("singer"), rs.getInt("cnt"));
+				list.add(s);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	public Song selectSongOneByNo(int no) {
 		Connection conn = null;
 		Statement stmt = null;

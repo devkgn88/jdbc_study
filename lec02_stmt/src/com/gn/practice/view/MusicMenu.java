@@ -46,7 +46,7 @@ public class MusicMenu {
 				sc.nextLine();
 				switch(menu) {
 					case 1 : addMusic(); break;
-					case 2 : break;
+					case 2 : selectMusicAllOrderByCnt();break;
 					default : System.out.println("메인 메뉴로 돌아갑니다.");
 				}	
 			} else {
@@ -67,6 +67,20 @@ public class MusicMenu {
 			System.out.println("아이디 혹은 비밀번호가 잘못되었습니다.");
 		}
 		
+	}
+	
+	public void selectMusicAllOrderByCnt() {
+		System.out.println("*** 음악 인기 순위 조회 ***");
+		List<Song> list = new ArrayList<Song>();
+		list = mc.selectMusicAllOrderByCnt();
+		if(list.isEmpty()) {
+			System.out.println("음악 목록을 찾을 수 없습니다.");
+		} else {
+			int num = 1;
+			for(Song s : list) {
+				System.out.println(num++ +"순위 "+s.toString());
+			}
+		}
 	}
 	
 	public void playMusic() {
