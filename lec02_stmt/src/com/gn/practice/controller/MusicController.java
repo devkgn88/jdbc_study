@@ -1,5 +1,7 @@
 package com.gn.practice.controller;
 
+import java.util.List;
+
 import com.gn.practice.model.dao.MusicDao;
 import com.gn.practice.model.vo.Song;
 import com.gn.practice.model.vo.User;
@@ -7,6 +9,18 @@ import com.gn.practice.model.vo.User;
 public class MusicController {
 	
 	private MusicDao md = new MusicDao();
+	
+	public int updatePlayCnt(int no) {
+		return md.updatePlayCnt(no);
+	}
+	
+	public Song selectSongOneByNo(int no) {
+		return md.selectSongOneByNo(no);
+	}
+	
+	public List<Song> selectMusicAll(){
+		return md.selectMusicAll();
+	}
 	
 	public int insertMusicOne(String title, String singer) {
 		Song s = new Song(title, singer);

@@ -1,8 +1,11 @@
 package com.gn.practice.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.gn.practice.controller.MusicController;
+import com.gn.practice.model.vo.Song;
 
 public class MusicMenu {
 	
@@ -54,7 +57,7 @@ public class MusicMenu {
 				int menu = sc.nextInt();
 				sc.nextLine();
 				switch(menu) {
-					case 1 : break;
+					case 1 : playMusic();break;
 					case 2 : break;
 					case 3 : break;
 					default : System.out.println("메인 메뉴로 돌아갑니다.");
@@ -67,7 +70,33 @@ public class MusicMenu {
 	}
 	
 	public void playMusic() {
-		
+		System.out.println("*** 음악 재생 ***");
+		System.out.println("전체 음악 목록을 확인하시여, 재생할 음악 번호를 입력하세요.");
+		List<Song> list = new ArrayList<Song>();
+		list = mc.selectMusicAll();
+		if(list.isEmpty()) {
+			System.out.println("재생할 수 있는 음악 목록이 없습니다.");
+		} else {
+			for(Song s : list) {
+				System.out.println(s);
+			}
+			System.out.print("번호 : ");
+			int num = sc.nextInt();
+			Song s = mc.selectSongOneByNo(num);
+			if(s != null) {
+				System.out.println(s.getSongSinger()+"의"
+			+s.getSongTitle()+"을 재생합니다.");
+				int cnt = mc.updatePlayCnt(s.getSongNo());
+				if(cnt > 0) {
+					System.out.println(s.getSongTitle()+" 재생횟수가 증가되었습니다.");
+				} else {
+					System.out.println("음악 재생중 문제가 발생하였습니다.");
+				}
+				
+			} else {
+				System.out.println("잘못된 번호입니다.");
+			}
+		}
 	}
 	
 	public void addMusic() {
