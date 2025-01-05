@@ -58,13 +58,35 @@ public class MusicMenu {
 				sc.nextLine();
 				switch(menu) {
 					case 1 : playMusic();break;
-					case 2 : break;
+					case 2 : updateUserOne(id);break;
 					case 3 : break;
 					default : System.out.println("메인 메뉴로 돌아갑니다.");
 				}	
 			}
 		} else {
 			System.out.println("아이디 혹은 비밀번호가 잘못되었습니다.");
+		}
+		
+	}
+	
+	public void updateUserOne(String id) {
+		System.out.println("*** 개인 정보 수정 ***");
+		System.out.println("개인정보를 수정하시려면 비밀번호를 다시 입력하세요.");
+		System.out.print("비밀번호 : ");
+		String pw = sc.nextLine();
+		int cnt = mc.loginMember(id, pw);
+		if(cnt > 0) {
+			System.out.println(id+"님 새로운 이름을 입력하세요.");
+			System.out.print("이름 : ");
+			String name = sc.nextLine();
+			int result = mc.updateUserName(id,name);
+			if(result > 0) {
+				System.out.println("이름이 수정되었습니다.");
+			} else {
+				System.out.println("이름 수정중 오류가 발생하였습니다.");
+			}
+		} else {
+			System.out.println("잘못된 비밀번호입니다.");
 		}
 		
 	}

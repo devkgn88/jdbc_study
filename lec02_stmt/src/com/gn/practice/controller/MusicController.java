@@ -10,6 +10,10 @@ public class MusicController {
 	
 	private MusicDao md = new MusicDao();
 	
+	public int updateUserName(String id, String name) {
+		return md.updateUserName(id,name);
+	}
+	
 	public List<Song> selectMusicAllOrderByCnt(){
 		return md.selectMusicAllOrderByCnt();
 	}
