@@ -42,7 +42,7 @@ public class MusicMenu {
 				int menu = sc.nextInt();
 				sc.nextLine();
 				switch(menu) {
-					case 1 : break;
+					case 1 : addMusic(); break;
 					case 2 : break;
 					default : System.out.println("메인 메뉴로 돌아갑니다.");
 				}	
@@ -64,6 +64,24 @@ public class MusicMenu {
 			System.out.println("아이디 혹은 비밀번호가 잘못되었습니다.");
 		}
 		
+	}
+	
+	public void playMusic() {
+		
+	}
+	
+	public void addMusic() {
+		System.out.println("*** 음악 추가 ***");
+		System.out.print("제목 : ");
+		String title = sc.nextLine();
+		System.out.print("아티스트명 : ");
+		String singer = sc.nextLine();
+		int result = mc.insertMusicOne(title,singer);
+		if(result > 0) {
+			System.out.println("음악이 추가되었습니다.");
+		} else {
+			System.out.println("음악 추가중 오류가 발생했습니다");
+		}
 	}
 	
 	public void signIn() {

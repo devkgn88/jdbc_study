@@ -1,11 +1,18 @@
 package com.gn.practice.controller;
 
 import com.gn.practice.model.dao.MusicDao;
+import com.gn.practice.model.vo.Song;
 import com.gn.practice.model.vo.User;
 
 public class MusicController {
 	
 	private MusicDao md = new MusicDao();
+	
+	public int insertMusicOne(String title, String singer) {
+		Song s = new Song(title, singer);
+		int result = md.insertSongOne(s);
+		return result;
+	}
 	
 	public int isDuplicateMember(String id) {
 		int cnt = md.selectMemberOneById(id);
