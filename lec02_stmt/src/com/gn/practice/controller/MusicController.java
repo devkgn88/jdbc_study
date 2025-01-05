@@ -10,6 +10,10 @@ public class MusicController {
 	
 	private MusicDao md = new MusicDao();
 	
+	public int deleteUserOne(String id) {
+		return md.deleteUserOne(id);
+	}
+	
 	public int updateUserName(String id, String name) {
 		return md.updateUserName(id,name);
 	}

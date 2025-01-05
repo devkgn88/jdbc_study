@@ -59,7 +59,7 @@ public class MusicMenu {
 				switch(menu) {
 					case 1 : playMusic();break;
 					case 2 : updateUserOne(id);break;
-					case 3 : break;
+					case 3 : deleteUserOne(id);break;
 					default : System.out.println("메인 메뉴로 돌아갑니다.");
 				}	
 			}
@@ -67,6 +67,24 @@ public class MusicMenu {
 			System.out.println("아이디 혹은 비밀번호가 잘못되었습니다.");
 		}
 		
+	}
+	
+	public void deleteUserOne(String id) {
+		System.out.println("*** 회원 탈퇴 ***");
+		System.out.println("탈퇴하시려면 비밀번호를 다시 입력하세요.");
+		System.out.print("비밀번호 : ");
+		String pw = sc.nextLine();
+		int cnt = mc.loginMember(id, pw);
+		if(cnt > 0) {
+			int result = mc.deleteUserOne(id);
+			if(result > 0) {
+				System.out.println(id+"님 정상적으로 회원탈퇴되었습니다.");
+			} else {
+				System.out.println("회원 탈퇴중 오류가 발생하였습니다.");
+			}
+		}else {
+			System.out.println("잘못된 비밀번호입니다.");
+		}
 	}
 	
 	public void updateUserOne(String id) {

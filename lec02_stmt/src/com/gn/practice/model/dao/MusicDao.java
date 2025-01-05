@@ -13,6 +13,31 @@ import com.gn.practice.model.vo.User;
 
 public class MusicDao {
 	
+	public int deleteUserOne(String id) {
+		Connection conn = null;
+		Statement stmt = null;
+		int result = 0;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mariadb://127.0.0.1:3306/watermelon_music";
+			conn = DriverManager.getConnection(url, "scott", "tiger");
+			stmt = conn.createStatement();
+			String sql = "DELETE FROM wm_user "
+					+ "WHERE user_id = '"+id+"'";
+			result = stmt.executeUpdate(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	public int updateUserName(String id, String name) {
 		Connection conn = null;
 		Statement stmt = null;
