@@ -21,7 +21,9 @@ public class ProjectDao {
 			String user = "scott";
 			String pw = "tiger";
 			conn = DriverManager.getConnection(url,user,pw);
-			String sql = "SELECT * from project";
+			String sql = "SELECT * from project p "
+					+"LEFT JOIN employee e "
+					+"ON p.project_manager = e.emp_id";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -31,6 +33,7 @@ public class ProjectDao {
 				vo.setProjectManager(rs.getInt("project_manager"));
 				vo.setRegDate(rs.getTimestamp("reg_date").toLocalDateTime());
 				vo.setModDate(rs.getTimestamp("mod_date").toLocalDateTime());
+				vo.setManagerName(rs.getString("emp_name"));
 				list.add(vo);
 			}
 		}catch(Exception e) {

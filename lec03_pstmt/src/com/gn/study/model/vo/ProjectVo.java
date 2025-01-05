@@ -9,7 +9,7 @@ public class ProjectVo {
 	private int projectManager;
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
-	
+	private String managerName;
 	
 	public ProjectVo() {}
 
@@ -62,6 +62,14 @@ public class ProjectVo {
 		this.modDate = modDate;
 	}
 	
+	public String getManagerName() {
+		return managerName;
+	}
+	
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+	
 	public String dateToStr(LocalDateTime ldt) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy-mm-dd(E)");
 		return dtf.format(ldt);
@@ -69,11 +77,16 @@ public class ProjectVo {
 
 	@Override
 	public String toString() {
-		return "[번호 : " + projectId 
-				+ ", 이름 : " + projectName 
-				+ ", 관리자 : " + projectManager 
-				+ ", 등록일 : " + dateToStr(regDate) 
-				+ ", 수정일 : " + dateToStr(modDate) + "]";
+		String result = "[번호 : " + projectId 
+				+ ", 이름 : " + projectName ;
+		if(projectManager==0) {
+			result += ", 관리자 : 미정";
+		} else {
+			result += ", 관리자 : "+ managerName+"(" +projectManager+")";
+		}
+		result += ", 등록일 : " + dateToStr(regDate) ;
+		result += ", 수정일 : " + dateToStr(modDate) + "]";
+		return result;
 	}
 	
 }
