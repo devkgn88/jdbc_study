@@ -8,6 +8,10 @@ import com.gn.study.model.vo.ProjectVo;
 public class ProjectController {
 	private ProjectDao pd = new ProjectDao();
 	
+	public ProjectVo searchByProjectName(String name) {
+		return pd.selectProjectOneByName(name);
+	}
+	
 	public List<ProjectVo> selectProjectAll(){
 		return pd.selectProjectAll();
 	}

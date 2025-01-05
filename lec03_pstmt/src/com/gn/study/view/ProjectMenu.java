@@ -28,13 +28,25 @@ public class ProjectMenu {
 			switch(menu) {
 				case 1 : createProject();break;
 				case 2 : showProjectList();break;
-				case 3 : break;
+				case 3 : searchByProjectName();break;
 				case 4 : break;
 				case 5 : break;
 				case 6 : break;
 				case 0 : System.out.println("이용해주셔서 감사합니다.");return;
 				default : System.out.println("메뉴를 잘못 입력하셨습니다.");
 			}	
+		}
+	}
+	
+	public void searchByProjectName() {
+		System.out.println("*** 프로젝트 이름 검색 ***");
+		System.out.print("프로젝트명 : ");
+		String name = sc.nextLine();
+		ProjectVo vo = pc.searchByProjectName(name);
+		if(vo == null) {
+			System.out.println("조회된 결과가 없습니다.");
+		} else {
+			System.out.println(vo);
 		}
 	}
 	

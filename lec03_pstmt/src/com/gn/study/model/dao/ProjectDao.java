@@ -10,6 +10,47 @@ import java.util.List;
 import com.gn.study.model.vo.ProjectVo;
 
 public class ProjectDao {
+	
+	public ProjectVo selectProjectOneByName(String name) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ProjectVo vo = null;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mariadb://127.0.0.1:3306/company_project";
+			String user = "scott";
+			String pw = "tiger";
+			conn = DriverManager.getConnection(url,user,pw);
+			String sql = "SELECT * from project p "
+					+"LEFT JOIN employee e "
+					+"ON p.project_manager = e.emp_id "
+					+"WHERE p.project_name LIKE CONCAT('%',?,'%')";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo = new ProjectVo();
+				vo.setProjectId(rs.getInt("project_id")); 
+				vo.setProjectName(rs.getString("project_name"));
+				vo.setProjectManager(rs.getInt("project_manager"));
+				vo.setRegDate(rs.getTimestamp("reg_date").toLocalDateTime());
+				vo.setModDate(rs.getTimestamp("mod_date").toLocalDateTime());
+				vo.setManagerName(rs.getString("emp_name"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return vo;
+	}
+	
 	public List<ProjectVo> selectProjectAll(){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
