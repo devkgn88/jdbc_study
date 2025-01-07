@@ -23,11 +23,6 @@ public class Dao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-//			try {
-//				if(pstmt != null) pstmt.close();
-//			}catch(Exception e) {
-//				e.printStackTrace();
-//			}
 			close(pstmt);
 		}
 		return result;

@@ -45,6 +45,7 @@ public class Menu {
 		int result = c.insertCarOne(modelName, price, date);
 		printResult(result,process);
 	}
+	
 	public void printResult(int result, String process) {
 		if(result > 0) {
 			System.out.println(process+"가 정상적으로 완료되었습니다.");
@@ -52,4 +53,5 @@ public class Menu {
 			System.out.println(process+"중 오류가 발생하였습니다.");
 		}
 	}
+	
 }
