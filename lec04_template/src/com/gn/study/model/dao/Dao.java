@@ -4,10 +4,39 @@ import static com.gn.study.common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.gn.study.model.vo.Car;
 
 public class Dao {
+	
+	public List<Car> selectCarAll(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Car> list = new ArrayList<Car>();
+		try {
+			String sql ="SELECT * FROM car";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			while(rs.next()) {
+				Car car = new Car(rs.getInt("car_no")
+						,rs.getString("car_model")
+						,rs.getInt("car_price")
+						,sdf.format(rs.getDate("car_date")));
+				list.add(car);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 
 	public int insertCarOne(Car car, Connection conn) {
 		PreparedStatement pstmt = null;

@@ -1,12 +1,14 @@
 package com.gn.study.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.gn.study.controller.Controller;
+import com.gn.study.model.vo.Car;
 
 public class Menu {
 	private Scanner sc = new Scanner(System.in);
-	private Controller c = new Controller();
+	private Controller controller = new Controller();
 	
 	public void mainMenu() {
 		while(true) {
@@ -22,13 +24,30 @@ public class Menu {
 			sc.nextLine();
 			switch(menu) {
 				case 1 : insertCarOne();break;
-				case 2 : break;
+				case 2 : selectCarAll();break;
 				case 3 : break;
 				case 4 : break;
 				case 5 : break;
 			}	
 		}
 	}
+	
+	public void selectCarAll() {
+		System.out.println("*** 목록 조회 ***");
+		List<Car> list = controller.selectCarAll();
+		printList(list);	
+	}
+	
+	public void printList(List<Car> list) {
+		if(list.isEmpty()) {
+			System.out.println("조회된 정보가 없습니다.");
+		} else {
+			for(Car c : list) {
+				System.out.println(c);
+			}
+		}
+	}
+	
 	
 	public void insertCarOne() {
 		String process = "추가";
@@ -42,7 +61,7 @@ public class Menu {
 		sc.nextLine();
 		System.out.print("출시일 : ");
 		String date = sc.nextLine();
-		int result = c.insertCarOne(modelName, price, date);
+		int result = controller.insertCarOne(modelName, price, date);
 		printResult(result,process);
 	}
 	
